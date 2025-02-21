@@ -77,7 +77,7 @@ const App = () => {
     );
   };
 
-  return (
+  return (<>
     <Head>
                 <title>22BCS12225</title>
                 <meta name="description" content="ABCD123 JSON Parser - Roll No: 22BCS12225" />
@@ -120,7 +120,7 @@ const App = () => {
           {renderFilteredResponse()}
         </div>
       )}
-    </div>
+    </div></>
   );
 };
 
