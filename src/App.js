@@ -43,7 +43,7 @@ const App = () => {
     }
   };
 
-  // Handle changes in the react-select dropdown
+  // Handle changes in the -select dropdown
   const handleSelectChange = (selected) => {
     // 'selected' is an array of option objects or null if nothing selected
     setSelectedOptions(selected || []);
@@ -79,7 +79,7 @@ const App = () => {
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
-      <h1>Placement Assessment</h1>
+      <h1>22BCS12225</h1>
 
       <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
         <label style={{ display: 'block', marginBottom: '0.5rem' }}>
