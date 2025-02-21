@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 
@@ -13,17 +13,19 @@ const App = () => {
   const [jsonInput, setJsonInput] = useState('');
   const [error, setError] = useState('');
   const [apiResponse, setApiResponse] = useState(null);
-  // selectedOptions will be an array of objects, e.g. [{ value: 'Numbers', label: 'Numbers' }]
   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  // Handle form submission: validate JSON then call the backend API.
+  // Set page title when component mounts
+  useEffect(() => {
+    document.title = "22BCS12225"; // Set default title
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     let payload;
     try {
-      // Validate that the input is valid JSON
       payload = JSON.parse(jsonInput);
     } catch (err) {
       setError('Invalid JSON format. Please check your input.');
@@ -31,10 +33,8 @@ const App = () => {
     }
 
     try {
-      // Change this to your actual backend URL
       const response = await axios.post('https://backend-3md0.onrender.com/bfhl', payload);
       setApiResponse(response.data);
-      // Optionally, set your page title to roll_number
       if (response.data.roll_number) {
         document.title = response.data.roll_number;
       }
@@ -43,13 +43,10 @@ const App = () => {
     }
   };
 
-  // Handle changes in the -select dropdown
   const handleSelectChange = (selected) => {
-    // 'selected' is an array of option objects or null if nothing selected
     setSelectedOptions(selected || []);
   };
 
-  // Render only the selected parts of the response
   const renderFilteredResponse = () => {
     if (!apiResponse) return null;
 
@@ -77,12 +74,7 @@ const App = () => {
     );
   };
 
-  return (<>
-    <Head>
-                <title>22BCS12225</title>
-                <meta name="description" content="ABCD123 JSON Parser - Roll No: 22BCS12225" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-            </Head>
+  return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>22BCS12225</h1>
 
@@ -120,7 +112,7 @@ const App = () => {
           {renderFilteredResponse()}
         </div>
       )}
-    </div></>
+    </div>
   );
 };
 
