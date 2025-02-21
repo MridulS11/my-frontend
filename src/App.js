@@ -78,6 +78,11 @@ const App = () => {
   };
 
   return (
+    <Head>
+                <title>22BCS12225</title>
+                <meta name="description" content="ABCD123 JSON Parser - Roll No: 22BCS12225" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+            </Head>
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>22BCS12225</h1>
 
