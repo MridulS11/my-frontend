@@ -23,7 +23,7 @@ const App = () => {
 
     try {
       // Change this to your actual backend URL, e.g. "http://localhost:5001/bfhl"
-      const response = await axios.post('http://localhost:5001/bfhl', payload);
+      const response = await axios.post('https://backend-3md0.onrender.com/bfhl', payload);
       setApiResponse(response.data);
       // Optionally, set your page title to roll_number
       if (response.data.roll_number) {
