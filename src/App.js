@@ -13,7 +13,7 @@ const App = () => {
   const [jsonInput, setJsonInput] = useState('');
   const [error, setError] = useState('');
   const [apiResponse, setApiResponse] = useState(null);
-  // Here, selectedOptions will be an array of objects, e.g. [{ value: 'Numbers', label: 'Numbers' }]
+  // selectedOptions will be an array of objects, e.g. [{ value: 'Numbers', label: 'Numbers' }]
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   // Handle form submission: validate JSON then call the backend API.
@@ -32,12 +32,8 @@ const App = () => {
 
     try {
       // Change this to your actual backend URL
-      const response = await axios.post(
-        'https://backend-3md0.onrender.com/bfhl',
-        payload
-      );
+      const response = await axios.post('https://backend-3md0.onrender.com/bfhl', payload);
       setApiResponse(response.data);
-
       // Optionally, set your page title to roll_number
       if (response.data.roll_number) {
         document.title = response.data.roll_number;
@@ -50,11 +46,7 @@ const App = () => {
   // Handle changes in the react-select dropdown
   const handleSelectChange = (selected) => {
     // 'selected' is an array of option objects or null if nothing selected
-    if (!selected) {
-      setSelectedOptions([]);
-      return;
-    }
-    setSelectedOptions(selected);
+    setSelectedOptions(selected || []);
   };
 
   // Render only the selected parts of the response
@@ -63,7 +55,6 @@ const App = () => {
 
     let displayLines = [];
 
-    // Instead of selectedOptions.includes('Numbers'), we check selectedOptions.some(...)
     if (selectedOptions.some(opt => opt.value === 'Numbers')) {
       displayLines.push(`Numbers: ${apiResponse.numbers.join(', ')}`);
     }
@@ -74,7 +65,6 @@ const App = () => {
       displayLines.push(`Highest Alphabet: ${apiResponse.highest_alphabet.join(', ')}`);
     }
 
-    // If nothing is selected, we won't render anything
     if (displayLines.length === 0) return null;
 
     return (
@@ -103,18 +93,13 @@ const App = () => {
           cols="50"
           style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
         />
-       <button type="submit">Submit</button>
+        <button type="submit">Submit</button>
       </form>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       {apiResponse && (
         <div>
-          <h2>API Response</h2>
-          <pre style={{ background: '#f2f2f2', padding: '10px' }}>
-            {JSON.stringify(apiResponse, null, 2)}
-          </pre>
-
           <div style={{ marginTop: '1rem' }}>
             <label><strong>Multi Filter:</strong></label>
             <Select
